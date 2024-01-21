@@ -1,67 +1,56 @@
 import {Component} from "react";
 
 class MovieCard extends Component{
-    constructor(){
-        super();
-        this.state= {
-            title: "The Avengers",
-            plot:"Supernatural powers shown in the movie",
-            price : 199,
-            rating: 8.9,
-            stars:0,
-            fav: false,
-            cart:false
-        }
 
-        // this.addStars = this.addStars.bind(this);
-    }
+    // decStars=()=>{
 
-    decStars=()=>{
+    //     if(this.state.stars<=0){
+    //         return;
+    //     }
+    //     this.setState((prevState)=>{
+    //         return{
+    //             stars:prevState.stars-0.5
+    //         }
+    //     })
+    // }
 
-        if(this.state.stars<=0){
-            return;
-        }
-        this.setState((prevState)=>{
-            return{
-                stars:prevState.stars-0.5
-            }
-        })
-    }
+    // addStars= ()=>{
+    //     //form1
+    //     // this.setState({
+    //     //     stars:this.state.stars+0.5
+    //     // });
 
-    addStars= ()=>{
-        //form1
-        // this.setState({
-        //     stars:this.state.stars+0.5
-        // });
+    //     if(this.state.stars>=5){
+    //         return;
+    //     }
 
-        if(this.state.stars>=5){
-            return;
-        }
-
-        //form2
-        this.setState((prevState)=>{
-            return{
-                stars:prevState.stars+0.5
-            }
-        })
-    }  
+    //     //form2
+    //     this.setState((prevState)=>{
+    //         return{
+    //             stars:prevState.stars+0.5
+    //         }
+    //     })
+    // }  
     
-    handleFav = ()=>{
-        this.setState({
-            fav: !this.state.fav
-        })
-    }
+    // handleFav = ()=>{
+    //     this.setState({
+    //         fav: !this.state.fav
+    //     })
+    // }
 
-    handleCart = ()=>{
-        this.setState({
-            cart:!this.state.cart
-        })
-    }
+    // handleCart = ()=>{
+    //     this.setState({
+    //         cart:!this.state.cart
+    //     })
+    // }
 
     render(){
 
-        const {title,plot,price,rating,stars,fav,cart} = this.state;
 
+        // const {movies:data} = this.props;  // we can name movies to data and then we can use data
+
+        const {title,plot,price,rating,stars,fav,cart} = this.props.movies;
+        const {movies,addStars,decStars,toggleFav,toggleCart} = this.props;
         return (
 
             <div className="main">
@@ -82,20 +71,20 @@ class MovieCard extends Component{
                             <div className="rating">{rating}</div>
                             <div className="star-dis">
 
-                                <img onClick={this.decStars} className="str-btn" alt="decrease" src="https://cdn-icons-png.flaticon.com/128/43/43625.png"/>
+                                <img onClick={()=>decStars(movies)} className="str-btn" alt="decrease" src="https://cdn-icons-png.flaticon.com/128/43/43625.png"/>
 
                                 <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" className="stars"/>
 
                                 <img className="str-btn" alt="increase"
                                  src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png"
-                                 onClick = {this.addStars}/>
+                                 onClick = {()=>addStars(movies)}/>
 
-                                <span class="starCount">{stars}</span>
+                                <span className="starCount">{stars}</span>
 
                             </div>
                             {/* {fav?<button onClick={this.handleFav} className="unfavourite-btn">Un-Favourite</button>: <button onClick={this.handleFav} className="favourite-btn">Favourite</button>} */}
-                            <button className= {fav?"unfavourite-btn":"favourite-btn"} onClick={this.handleFav}>{fav?"unfavourite":"favourite"}</button>
-                            <button className={cart?"remove-cart-btn":"cart-btn"} onClick={this.handleCart}>{cart?"Remove from cart":"Add to cart"}</button>
+                            <button className= {fav?"unfavourite-btn":"favourite-btn"} onClick={()=>toggleFav(movies)}>{fav?"unfavourite":"favourite"}</button>
+                            <button className={cart?"remove-cart-btn":"cart-btn"} onClick={()=>toggleCart(movies)}>{cart?"Remove from cart":"Add to cart"}</button>
                             
                         </div>
 
